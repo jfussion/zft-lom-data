@@ -3,14 +3,14 @@ jobs:
   update_lom_data:
     working_directory: ~/data
     docker:
-      - image: cimg/base:2020.01
+      - image: cimg/base:2021.11
     environment:
       TZ: "Asia/Manila"
     steps:
       - checkout
       - run:
           name: "get lom's inventory and staking weight"
-          command: ./bin/lom -i `pwd`/accounts -path `pwd`/data/`date +"%Y-%m-%dT%H%M.csv"`
+          command: ./bin/lom -i `pwd`/accounts -path `pwd`/data/`TZ="Asia/Manila" date +"%Y-%m-%dT%H%M.csv"`
       - run:
           name: "commit changes and push"
           command: | 
@@ -20,12 +20,27 @@ jobs:
             git commit -m "`date +%F` pull latest staking weight"
             git push -u origin main
 
+  test:
+    working_directory: ~/data
+    docker:
+      - image: cimg/base:2021.11
+    environment:
+      TZ: "Asia/Manila"
+    steps:
+      - checkout
+      - run:
+          name: "get lom's inventory and staking weight"
+          command: |
+            export path=`pwd`/data/`TZ="Asia/Manila" date +"%Y-%m-%dT%H%M%Z.csv"`
+            echo $path
+            ./bin/lom -i `pwd`/accounts-test -path $path
+            cat $path
 
 workflows:
   version: 2
   update-on-push:
     jobs:
-      - update_lom_data
+      - test:
           filters:
             branches:
               only:
