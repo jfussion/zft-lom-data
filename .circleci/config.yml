@@ -44,7 +44,7 @@ workflows:
   version: 2
   update-on-push:
     jobs:
-      - update_lom_data
+      - test:
           filters:
             branches:
               only:
