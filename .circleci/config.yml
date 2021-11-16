@@ -17,7 +17,7 @@ jobs:
             git config user.email "bonillajeb@gmail.com"
             git config user.name "Joseph Edsel Bonilla"
             git add .
-            git commit -m "`date +%F` pull latest staking weight [ci skip]"
+            git commit -m "[ci skip] `date +%F` pull latest staking weight"
             git push -u origin main
 
   test:
