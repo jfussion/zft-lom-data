@@ -3,7 +3,7 @@ jobs:
   update_lom_data:
     working_directory: ~/data
     docker:
-      - image: cimg/base:2020.01
+      - image: cimg/base:2021.11
     environment:
       TZ: "Asia/Manila"
     steps:
