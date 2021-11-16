@@ -31,7 +31,7 @@ jobs:
       - run:
           name: "get lom's inventory and staking weight"
           command: |
-            export path=`pwd`/data/`TZ="Asia/Manila" date +"%Y-%m-%dT%H%M%Z.csv"`
+            export path=`pwd`/data/`export TZ="Asia/Manila" && date +"%Y-%m-%dT%H%M%Z.csv"`
             echo $path
             ./bin/lom -i `pwd`/accounts-test -path $path
             cat $path
