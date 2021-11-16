@@ -26,10 +26,6 @@ workflows:
   update-on-push:
     jobs:
       - update_lom_data
-        filters:
-          branches:
-            only:
-              - main
 
   nightly:
     triggers:
