@@ -1,0 +1,35 @@
+version: 2
+jobs:
+  update_lom_data:
+    working_directory: ~/data
+    docker:
+      - image: cimg/base:2020.01
+    environment:
+      TZ: "Asia/Manila"
+    steps:
+      - checkout
+      - run:
+          name: "get lom's inventory and staking weight"
+          command: ./bin/lom -i `pwd`/accounts -path `pwd`/data/`date +"%Y-%m-%dT%H%M.csv"`
+      - run:
+          name: "commit changes and push"
+          command: | 
+            git config user.email "bonillajeb@gmail.com"
+            git config user.name "Joseph Edsel Bonilla"
+            git add .
+            git commit -m "`date +%F` pull latest staking weight"
+            git push -u origin main
+
+
+workflows:
+  version: 2
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 * * * *"
+          filters:
+            branches:
+              only:
+                - main
+    jobs:
+      - update_lom_data
