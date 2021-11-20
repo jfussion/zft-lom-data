@@ -30,14 +30,14 @@ jobs:
       - checkout
       - run:
           name: "get lom's inventory and staking weight"
-          command: ./bin/lom transactions -daily -output `pwd`/data/transactions/`TZ="Asia/Manila" date --date="yesterday" +"%Y-%m-%d.csv"`
+          command: ./bin/lom transactions -daily -output `pwd`/data/transactions/`TZ="UTC" date --date="yesterday" +"%Y-%m-%d.csv"`
       - run:
           name: "commit changes and push"
           command: | 
             git config user.email "bonillajeb@gmail.com"
             git config user.name "Joseph Edsel Bonilla"
             git add .
-            git commit -m "[ci skip] `TZ='Asia/Manila' date +'%FT%R%z'` pull today\'s martia payout"
+            git commit -m "[ci skip] `TZ='Asia/Manila' date +'%FT%R%z'` pull today's martia payout"
             git push -u origin main
 
   test:
@@ -61,7 +61,6 @@ workflows:
   update-on-push:
     jobs:
       - fetch_bank_mars_token_release
-      - update_lom_data
 
   nightly:
     triggers:
