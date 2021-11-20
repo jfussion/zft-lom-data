@@ -10,7 +10,7 @@ jobs:
       - checkout
       - run:
           name: "get lom's inventory and staking weight"
-          command: ./bin/lom -i `pwd`/accounts -path `pwd`/data/`TZ="Asia/Manila" date +"%Y-%m-%dT%H%M.csv"`
+          command: ./bin/lom -i `pwd`/accounts -path `pwd`/data/inventory/`TZ="Asia/Manila" date +"%Y-%m-%dT%H%M.csv"`
       - run:
           name: "commit changes and push"
           command: | 
