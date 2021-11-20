@@ -61,6 +61,7 @@ workflows:
   update-on-push:
     jobs:
       - fetch_bank_mars_token_release
+      - update_lom_data
 
   nightly:
     triggers:
