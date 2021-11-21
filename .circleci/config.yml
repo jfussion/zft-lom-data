@@ -32,6 +32,9 @@ jobs:
           name: "get lom's inventory and staking weight"
           command: ./bin/lom transactions -daily -output `pwd`/data/transactions/`TZ="UTC" date --date="yesterday" +"%Y-%m-%d.csv"`
       - run:
+          name: "get lom's inventory and staking weight"
+          command: ./bin/lom inventory -i `pwd`/accounts -path `pwd`/data/inventory/`TZ="Asia/Manila" date +"%Y-%m-%dT%H%M.csv"`
+      - run:
           name: "commit changes and push"
           command: | 
             git config user.email "bonillajeb@gmail.com"
@@ -63,10 +66,10 @@ workflows:
       - fetch_bank_mars_token_release
       - update_lom_data
 
-  nightly:
+  four-hourly:
     triggers:
       - schedule:
-          cron: "0 0,4,8,12,16,20 * * *"
+          cron: "0 4,8,12,16,20 * * *"
           filters:
             branches:
               only:
