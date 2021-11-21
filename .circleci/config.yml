@@ -40,7 +40,7 @@ jobs:
             git config user.email "bonillajeb@gmail.com"
             git config user.name "Joseph Edsel Bonilla"
             git add .
-            git commit -m "[ci skip] `TZ='Asia/Manila' date +'%FT%R%z'` pull today's martia payout"
+            git commit -m "[ci skip] `TZ='Asia/Manila' date +'%FT%R%z'` pull today's martia payout and Lom's staking weight"
             git push -u origin main
 
   test:
